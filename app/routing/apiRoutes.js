@@ -26,7 +26,6 @@ module.exports = function (app) {
         // req.body hosts is equal to the JSON post sent from the user
         // This works because of our body parsing middleware
         var userData = req.body;
-        //console.log(userData); //after clicking Submit button in survey window
 
         // Determine the user's most compatible friend using the following as a guide:
         // Convert each user's results into a simple array of numbers (ex: [5, 1, 4, 4, 5, 1, 2, 5, 4, 1]).
@@ -65,11 +64,13 @@ module.exports = function (app) {
             m = Math.min.apply(Math, difTotalArray);
         }
 
-        for (var p = 0; p < 10; p++) {
+        for (var p = 0; p < 10; p++) { //get Best match friend information
             if (difTotalArray[p] === m) {
                 console.log(p);
                 console.log(friendsData[p])
+                return res.json(friendsData[p]);
             }
         }
+        return res.json(false);
     })
 };
